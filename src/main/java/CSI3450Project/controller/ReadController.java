@@ -1,7 +1,6 @@
 package CSI3450Project.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -73,14 +72,10 @@ public class ReadController {
         return roomRepository.findById(roomId).get();
     }
 
+    
     @GetMapping("/room/business")
     public List<Room> getRoomsForBusiness(HttpServletRequest request, @RequestParam Integer businessId) {
-        Optional<Business> business = businessRepository.findById(businessId);
-
-        if (business.isPresent()) {
-            return business.get().getRooms();
-        } else {
-            return null;
-        }
+        return roomRepository.findByBusinessId(businessId);
     }
+    
 }

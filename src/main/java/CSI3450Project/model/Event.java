@@ -16,7 +16,7 @@ import lombok.Data;
 @Data
 public class Event {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "EVENT_ID")
     private Integer id;
 

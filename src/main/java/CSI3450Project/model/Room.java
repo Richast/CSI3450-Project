@@ -1,14 +1,10 @@
 package CSI3450Project.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -16,9 +12,9 @@ import lombok.Data;
 @Entity
 @Table(name = "ROOM")
 @Data
-public class Room implements Serializable {
+public class Room {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ROOM_ID")
     private Integer id;
 
@@ -28,10 +24,9 @@ public class Room implements Serializable {
     @Column(name = "ROOM_PRICE")
     private Float price;
 
-    @Column(name = "ROOM_VACANT")
+    @Column(name = "ROOM_VACANT", columnDefinition = "boolean default true")
     private Boolean vacant;
 
-    @ManyToOne
-    @JoinTable(name = "BUSINESS")
-    private Business business;
+    @Column(name = "BUS_ID")
+    private Integer businessId;
 }
