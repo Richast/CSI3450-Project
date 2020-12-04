@@ -18,7 +18,7 @@ USE `csi3450` ;
 -- Table `csi3450`.`CUSTOMER`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `csi3450`.`CUSTOMER` (
-  `CUS_ID` INT NOT NULL,
+  `CUS_ID` INT NOT NULL AUTO_INCREMENT,
   `CUS_NAME` VARCHAR(45) NOT NULL,
   `CUS_STATE` VARCHAR(45) NOT NULL,
   `CUS_CITY` VARCHAR(45) NOT NULL,
@@ -34,7 +34,7 @@ ENGINE = InnoDB;
 -- Table `csi3450`.`BUSINESS`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `csi3450`.`BUSINESS` (
-  `BUS_ID` INT NOT NULL,
+  `BUS_ID` INT NOT NULL AUTO_INCREMENT,
   `BUS_NAME` VARCHAR(45) NOT NULL,
   `BUS_STATE` VARCHAR(45) NOT NULL,
   `BUS_CITY` VARCHAR(45) NOT NULL,
@@ -51,7 +51,7 @@ ENGINE = InnoDB;
 -- Table `csi3450`.`EVENT`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `csi3450`.`EVENT` (
-  `EVENT_ID` INT NOT NULL,
+  `EVENT_ID` INT NOT NULL AUTO_INCREMENT,
   `EVENT_NAME` VARCHAR(45) NOT NULL,
   `EVENT_STATE` VARCHAR(45) NOT NULL,
   `EVENT_CITY` VARCHAR(45) NOT NULL,
@@ -75,7 +75,7 @@ ENGINE = InnoDB;
 -- Table `csi3450`.`ROOM`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `csi3450`.`ROOM` (
-  `ROOM_ID` INT NOT NULL,
+  `ROOM_ID` INT NOT NULL AUTO_INCREMENT,
   `ROOM_NUM` INT NOT NULL,
   `ROOM_PRICE` DECIMAL(10,2) NOT NULL,
   `ROOM_VACANT` TINYINT NOT NULL,
@@ -109,7 +109,7 @@ ENGINE = InnoDB;
 -- Table `csi3450`.`BOOKING`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `csi3450`.`BOOKING` (
-  `BOOKING_ID` INT NOT NULL,
+  `BOOKING_ID` INT NOT NULL AUTO_INCREMENT,
   `BUS_ID` INT NOT NULL,
   `CUS_ID` INT NOT NULL,
   `ROOM_ID` INT NOT NULL,
@@ -142,5 +142,28 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
+-- -----------------------------------------------------
+-- DEMO DATA
+-- -----------------------------------------------------
+
+INSERT INTO BUSINESS(BUS_NAME, BUS_STATE, BUS_CITY, BUS_STREET, BUS_ZIP, BUS_CONTACT, BUS_ROOMS, BUS_AMENITIES) VALUES
+  ("The Dill", "MI", "Detroit", "4829 1st Street", "48325", "248-492-0314", 20, "Coffee");
+
+INSERT INTO CUSTOMER(CUS_NAME, CUS_STATE, CUS_CITY, CUS_STREET, CUS_ZIP, CUS_CONTACT, CUS_PAYMENT) VALUES
+  ("Belial Dumbfuckington", "MI", "Shittown", "98281 Shit Lane", "19843", "481-1421-5122", "VISA");
+
+INSERT INTO EVENT(EVENT_NAME, EVENT_STATE, EVENT_CITY, EVENT_STREET, EVENT_ZIP, EVENT_DATE, EVENT_CONTACT, EVENT_PRICE, BUS_ID) VALUES
+  ("ChickenCon", "MI", "Warren", "123 Idk", "48325", DATE("2020-12-22"), "248-414-2094", 20.45, 1);
+
+INSERT INTO ROOM(ROOM_NUM, ROOM_PRICE, ROOM_VACANT) VALUES
+  (1, 30.00, false);
+
+/*
+INSERT INTO BUSINESS_ROOMS VALUES
+  (1, 1);
+*/
+-- -----------------------------------------------------
+-- ADDITIONAL SETUP
+-- -----------------------------------------------------
 CREATE USER IF NOT EXISTS 'testuser'@'localhost' IDENTIFIED BY "password";
 GRANT ALL ON csi3450.* TO 'testuser'@'localhost';

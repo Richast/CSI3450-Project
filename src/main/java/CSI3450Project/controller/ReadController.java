@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import CSI3450Project.dao.*;
@@ -24,7 +25,7 @@ public class ReadController {
 
     // BOOKING endpoints
     @GetMapping("/booking")
-    public Booking getBookingById(HttpServletRequest request, Integer bookingId) {
+    public Booking getBookingById(HttpServletRequest request, @RequestParam Integer bookingId) {
         return bookingRepository.findById(bookingId).get();
     }
 
@@ -40,7 +41,7 @@ public class ReadController {
 
     //BUSINESS endpoints
     @GetMapping("/business")
-    public Business getBusiness(HttpServletRequest request, Integer businessId) {
+    public Business getBusiness(HttpServletRequest request, @RequestParam Integer businessId) {
         return businessRepository.findById(businessId).get();
     }
 

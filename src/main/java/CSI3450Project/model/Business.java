@@ -2,7 +2,6 @@ package CSI3450Project.model;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +16,7 @@ import lombok.Data;
 @Entity
 @Table(name = "BUSINESS")
 @Data
-public class Business implements Serializable{
+public class Business implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "BUS_ID")
