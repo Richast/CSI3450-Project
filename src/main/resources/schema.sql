@@ -158,10 +158,9 @@ INSERT INTO EVENT(EVENT_NAME, EVENT_STATE, EVENT_CITY, EVENT_STREET, EVENT_ZIP, 
 INSERT INTO ROOM(ROOM_NUM, ROOM_PRICE, ROOM_VACANT) VALUES
   (1, 30.00, false);
 
-/*
-INSERT INTO BUSINESS_ROOMS VALUES
+INSERT INTO BUSINESS_ROOMS(BUS_ID, ROOM_ID) VALUES
   (1, 1);
-*/
+
 -- -----------------------------------------------------
 -- ADDITIONAL SETUP
 -- -----------------------------------------------------
