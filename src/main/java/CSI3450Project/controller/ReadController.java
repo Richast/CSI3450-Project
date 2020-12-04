@@ -31,12 +31,12 @@ public class ReadController {
     }
 
     @GetMapping("/booking/customer")
-    public List<Booking> getBookingsForCustomer(HttpServletRequest request, Integer customerId) {
+    public List<Booking> getBookingsForCustomer(HttpServletRequest request, @RequestParam Integer customerId) {
         return bookingRepository.findByCustomerId(customerId);
     }
 
     @GetMapping("/booking/business")
-    public List<Booking> getBookingsForBusiness(HttpServletRequest request, Integer businessId) {
+    public List<Booking> getBookingsForBusiness(HttpServletRequest request, @RequestParam Integer businessId) {
         return bookingRepository.findByBusinessId(businessId);
     }
 
@@ -47,35 +47,35 @@ public class ReadController {
     }
 
     @GetMapping("/businesses")
-    public List<Business> getBusinesses(HttpServletRequest request, String zip) {
+    public List<Business> getBusinesses(HttpServletRequest request, @RequestParam String zip) {
         return businessRepository.findByZip(zip);
     }
 
     //CUSTOMER endpoints
     @GetMapping("/customer")
-    public Customer getCustomer(HttpServletRequest request, Integer customerId) {
+    public Customer getCustomer(HttpServletRequest request, @RequestParam Integer customerId) {
         return customerRepository.findById(customerId).get();
     }
 
     //EVENT endpoints
     @GetMapping("/event")
-    public Event getEvent(HttpServletRequest request, Integer eventId) {
+    public Event getEvent(HttpServletRequest request, @RequestParam Integer eventId) {
         return eventRepository.findById(eventId).get();
     }
 
     @GetMapping("/events")
-    public List<Event> getEvents(HttpServletRequest request, String zip) {
+    public List<Event> getEvents(HttpServletRequest request, @RequestParam String zip) {
         return eventRepository.findByZip(zip);
     }
 
     //ROOM endpoints
     @GetMapping("/room")
-    public Room getRoom(HttpServletRequest request, Integer roomId) {
+    public Room getRoom(HttpServletRequest request, @RequestParam Integer roomId) {
         return roomRepository.findById(roomId).get();
     }
 
     @GetMapping("/room/business")
-    public List<Room> getRoomsForBusiness(HttpServletRequest request, Integer businessId) {
+    public List<Room> getRoomsForBusiness(HttpServletRequest request, @RequestParam Integer businessId) {
         Optional<Business> business = businessRepository.findById(businessId);
 
         if (business.isPresent()) {
