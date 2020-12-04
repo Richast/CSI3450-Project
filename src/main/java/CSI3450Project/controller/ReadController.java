@@ -1,6 +1,7 @@
 package CSI3450Project.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,7 +26,8 @@ public class ReadController {
     // BOOKING endpoints
     @GetMapping("/booking")
     public Booking getBookingById(HttpServletRequest request, @RequestParam Integer bookingId) {
-        return bookingRepository.findById(bookingId).get();
+        Optional<Booking> booking = bookingRepository.findById(bookingId);
+        return booking.isPresent() ? booking.get() : null;
     }
 
     @GetMapping("/booking/customer")
@@ -41,7 +43,8 @@ public class ReadController {
     //BUSINESS endpoints
     @GetMapping("/business")
     public Business getBusiness(HttpServletRequest request, @RequestParam Integer businessId) {
-        return businessRepository.findById(businessId).get();
+        Optional<Business> business = businessRepository.findById(businessId);
+        return business.isPresent() ? business.get() : null;
     }
 
     @GetMapping("/businesses")
@@ -52,13 +55,15 @@ public class ReadController {
     //CUSTOMER endpoints
     @GetMapping("/customer")
     public Customer getCustomer(HttpServletRequest request, @RequestParam Integer customerId) {
-        return customerRepository.findById(customerId).get();
+        Optional<Customer> customer = customerRepository.findById(customerId);
+        return customer.isPresent() ? customer.get() : null;
     }
 
     //EVENT endpoints
     @GetMapping("/event")
     public Event getEvent(HttpServletRequest request, @RequestParam Integer eventId) {
-        return eventRepository.findById(eventId).get();
+        Optional<Event> event = eventRepository.findById(eventId);
+        return event.isPresent() ? event.get() : null;
     }
 
     @GetMapping("/events")
@@ -69,7 +74,8 @@ public class ReadController {
     //ROOM endpoints
     @GetMapping("/room")
     public Room getRoom(HttpServletRequest request, @RequestParam Integer roomId) {
-        return roomRepository.findById(roomId).get();
+        Optional<Room> room = roomRepository.findById(roomId);
+        return room.isPresent() ? room.get() : null;
     }
 
     

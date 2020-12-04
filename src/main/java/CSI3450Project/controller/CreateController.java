@@ -11,16 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import CSI3450Project.dao.BookingRepository;
-import CSI3450Project.dao.BusinessRepository;
-import CSI3450Project.dao.CustomerRepository;
-import CSI3450Project.dao.EventRepository;
-import CSI3450Project.dao.RoomRepository;
-import CSI3450Project.model.Booking;
-import CSI3450Project.model.Business;
-import CSI3450Project.model.Customer;
-import CSI3450Project.model.Event;
-import CSI3450Project.model.Room;
+import CSI3450Project.dao.*;
+import CSI3450Project.model.*;
 
 @RestController
 @RequestMapping("/csi3450project/v1")
