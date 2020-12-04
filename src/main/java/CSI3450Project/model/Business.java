@@ -2,6 +2,7 @@ package CSI3450Project.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -46,6 +49,7 @@ public class Business implements Serializable {
     @Column(name = "BUS_AMENITIES")
     private String amenities;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "business")
     private List<Room> rooms;
 }
