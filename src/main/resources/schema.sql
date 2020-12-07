@@ -15,18 +15,21 @@ CREATE SCHEMA IF NOT EXISTS `csi3450` DEFAULT CHARACTER SET utf8 ;
 USE `csi3450` ;
 
 -- -----------------------------------------------------
--- Table `csi3450`.`CUSTOMER`
+-- Table `csi3450`.`USER`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `csi3450`.`CUSTOMER` (
-  `CUS_ID` INT NOT NULL AUTO_INCREMENT,
-  `CUS_NAME` VARCHAR(45) NOT NULL,
-  `CUS_STATE` VARCHAR(2) NOT NULL,
-  `CUS_CITY` VARCHAR(45) NOT NULL,
-  `CUS_STREET` VARCHAR(45) NOT NULL,
-  `CUS_ZIP` VARCHAR(5) NOT NULL,
-  `CUS_CONTACT` VARCHAR(15) NOT NULL,
-  `CUS_PAYMENT` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`CUS_ID`))
+CREATE TABLE IF NOT EXISTS `csi3450`.`USER` (
+  `USER_ID` INT NOT NULL AUTO_INCREMENT,
+  `USER_EMAIL` VARCHAR(45) NOT NULL,
+  `USER_PASSWORD` VARCHAR(45) NOT NULL,
+  `USER_TYPE` VARCHAR(45) NOT NULL,
+  `USER_NAME` VARCHAR(45) NOT NULL,
+  `USER_STATE` VARCHAR(2) NOT NULL,
+  `USER_CITY` VARCHAR(45) NOT NULL,
+  `USER_STREET` VARCHAR(45) NOT NULL,
+  `USER_ZIP` VARCHAR(5) NOT NULL,
+  `USER_CONTACT` VARCHAR(15) NOT NULL,
+  `USER_PAYMENT` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`USER_ID`, `USER_EMAIL`))
 ENGINE = InnoDB;
 
 
@@ -111,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `csi3450`.`BOOKING` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_BOOKING_CUSTOMER1`
     FOREIGN KEY (`CUS_ID`)
-    REFERENCES `csi3450`.`CUSTOMER` (`CUS_ID`)
+    REFERENCES `csi3450`.`USER` (`USER_ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_BOOKING_ROOM1`
@@ -142,17 +145,22 @@ INSERT INTO BUSINESS(BUS_NAME, BUS_STATE, BUS_CITY, BUS_STREET, BUS_ZIP, BUS_CON
   ('Kutch-Hilll', 'AR', 'Fort Smith', '926 Crescent Oaks Plaza', '72905', '479-683-9610', 2, 'Spa'),
   ('Stanton-Hudson', 'WI', 'Milwaukee', '66 Valley Edge Parkway', '53210', '262-474-5861', 4, 'Bar');
 
-INSERT INTO CUSTOMER(CUS_NAME, CUS_STATE, CUS_CITY, CUS_STREET, CUS_ZIP, CUS_CONTACT, CUS_PAYMENT) VALUES
-  ("Jack Smith", "MI", "Auburn Hills", "2050 Mattie Lu Dr", "48326", "248-1421-5122", "4892758397214"),
-  ('Kaye Dommersen', 'FL', 'Fort Pierce', '59041 Scofield Road', "84364", '772-174-6010', '337941515297678'),
-  ('Geoffrey Mort', 'PA', 'Wilkes Barre', '3 Elka Junction', '18768', '570-354-5919', '493607919734604973'),
-  ('Morganne Boyton', 'TX', 'Dallas', '53 Shoshone Road', '75342', '214-861-1097', '4026875585459347'),
-  ('Dagmar Jacobowits', 'MN', 'Saint Paul', '4413 Bay Avenue', '55114', '612-998-8240', '5292504769833085'),
-  ('Mort Hearst', 'AZ', 'Phoenix', '678 Barby Pass', '85099', '602-626-7861', '4175005095788824'),
-  ('Nobie Spoerl', 'MO', 'Kansas City', '289 Crowley Center', '64142', '816-457-6495', '561059325674544236'),
-  ('Eleanor McUre', 'MN', 'Minneapolis', '9270 Crescent Oaks Place', '55480', '612-320-9739', '3534663831220631'),
-  ('Tammie Engall', 'NC', 'Winston Salem', '89 Jenifer Point', '27157', '336-335-0964', '56022426113380128'),
-  ('Fanni Bysaker', 'PA', 'Mc Keesport', '2397 La Follette Drive', '15134', '412-946-5593', '5893894169321168');
+INSERT INTO USER(USER_EMAIL, USER_PASSWORD, USER_TYPE, USER_NAME, USER_STATE, USER_CITY, USER_STREET, USER_ZIP, USER_CONTACT, USER_PAYMENT) VALUES
+  ('frockcliffe0@scientificamerican.com', 'lqAM0zgt61W', 'Administrator', 'Farlay Rockcliffe', 'MI', 'Detroit', '6899 Eagan Crossing', '48232', '313-568-6369', '3570849280160270'),
+  ('lchazette1@wikimedia.org', '4BjW3Z', 'Customer', 'Lyndy Chazette', 'MI', 'Kalamazoo', '5 Vidon Center', '49048', '517-743-8479', '6379381743427092'),
+  ('ccribbin2@google.com', 'osuwrK', 'Administrator', 'Carlynne Cribbin', 'MI', 'Ann Arbor', '7 Monument Pass', '48107', '734-184-0007', '3534512260103075'),
+  ('scolgrave3@miibeian.gov.cn', 'RTBUdrTrH1L', 'Administrator', 'Skip Colgrave', 'MI', 'Detroit', '423 Daystar Center', '48211', '313-490-5850', '67632557362109153'),
+  ('dkingdon4@dropbox.com', 'SE53wL', 'Administrator', 'Dom Kingdon', 'MI', 'Detroit', '71 Nobel Circle', '48295', '313-708-6995', '4041591198015431'),
+  ('mdarth5@twitter.com', 'dLcw1lxt', 'BnB', 'Marion Darth', 'MI', 'Ann Arbor', '4684 Grim Terrace', '48107', '734-132-5233', '4175000732269098'),
+  ('gcrasswell6@fastcompany.com', 'mTwIPexPERcA', 'Customer', 'Gertrude Crasswell', 'MI', 'Detroit', '965 Transport Center', '48258', '248-102-3652', '3570860919281031'),
+  ('pvoelker7@wsj.com', 'yasymnh6M', 'Customer', 'Paolina Voelker', 'MI', 'Grand Rapids', '2365 Melvin Court', '49518', '616-102-4880', '3569575465952115'),
+  ('dvarley8@newyorker.com', 'fB2xpMTCyF40', 'Customer', 'Darbie Varley', 'MI', 'Dearborn', '063 Mallard Circle', '48126', '734-645-6876', '6759605503835072'),
+  ('rbranton9@4shared.com', 'tY0SYKp', 'Event', 'Rhianna Branton', 'MI', 'Lansing', '6213 Service Circle', '48956', '517-792-7108', '371339975036552'),
+  ('gallgooda@slashdot.org', 'nKMo6bH07', 'Administrator', 'Gladys Allgood', 'MI', 'Lansing', '6861 Graedel Junction', '48912', '517-334-8667', '3561071512543899'),
+  ('pmoneypennyb@blogtalkradio.com', 'By4eA5U5v', 'Event', 'Paulette Moneypenny', 'MI', 'Detroit', '315 Ohio Junction', '48275', '313-172-5513', '3536996537105815'),
+  ('cmontfordc@ucoz.com', 'dn6RzCj', 'BnB', 'Cosetta Montford', 'MI', 'Detroit', '1 Stone Corner Trail', '48224', '586-452-2100', '3552697132774539'),
+  ('gsillsd@bloomberg.com', 'ubInqE1c', 'Customer', 'Gil Sills', 'MI', 'Detroit', '4 Vera Alley', '48242', '248-197-1932', '3578343036845857'),
+  ('lcadneye@google.co.jp', 'IagiV2meA4Io', 'BnB', 'Lurlene Cadney', 'MI', 'Detroit', '3054 Arkansas Lane', '48258', '734-150-1197', '4741690112862');
 
 INSERT INTO EVENT(EVENT_NAME, EVENT_STATE, EVENT_CITY, EVENT_STREET, EVENT_ZIP, EVENT_CONTACT, EVENT_DATE, EVENT_PRICE, BUS_ID) VALUES
   ('Sonair', 'CA', 'Los Angeles', '21 Twin Pines Road', '48201', '323-867-9461', '2020-12-12', 93.55, 1),

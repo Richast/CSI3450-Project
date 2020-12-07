@@ -19,7 +19,7 @@ import CSI3450Project.model.*;
 public class CreateController {
     @Autowired private BookingRepository bookingRepository;
     @Autowired private BusinessRepository businessRepository;
-    @Autowired private CustomerRepository customerRepository;
+    @Autowired private UserRepository userRepository;
     @Autowired private EventRepository eventRepository;
     @Autowired private RoomRepository roomRepository;
 
@@ -50,18 +50,21 @@ public class CreateController {
         businessRepository.save(business);
     }
 
-    @PostMapping("/customer")
-    public void createCustomer(HttpServletRequest request, @RequestBody Map<String, String> body) {
-        Customer customer = new Customer();
-        customer.setName(body.get("name"));
-        customer.setState(body.get("state"));
-        customer.setCity(body.get("city"));
-        customer.setStreet(body.get("street"));
-        customer.setZip(body.get("zip"));
-        customer.setContact(body.get("contact"));
-        customer.setPayment(body.get("payment"));
+    @PostMapping("/user")
+    public void createUser(HttpServletRequest request, @RequestBody Map<String, String> body) {
+        User user = new User();
+        user.setEmail(body.get("email"));
+        user.setPassword(body.get("password"));
+        user.setType(body.get("type"));
+        user.setName(body.get("name"));
+        user.setState(body.get("state"));
+        user.setCity(body.get("city"));
+        user.setStreet(body.get("street"));
+        user.setZip(body.get("zip"));
+        user.setContact(body.get("contact"));
+        user.setPayment(body.get("payment"));
 
-        customerRepository.save(customer);
+        userRepository.save(user);
     }
 
     @PostMapping("/event")

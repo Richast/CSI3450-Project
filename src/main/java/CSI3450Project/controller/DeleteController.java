@@ -17,7 +17,7 @@ import CSI3450Project.model.*;
 @RequestMapping("/csi3450project/v1")
 public class DeleteController {
     @Autowired private BookingRepository bookingRepository;
-    @Autowired private CustomerRepository customerRepository;
+    @Autowired private UserRepository userRepository;
     @Autowired private RoomRepository roomRepository;
 
     @DeleteMapping("/booking")
@@ -28,12 +28,12 @@ public class DeleteController {
             bookingRepository.delete(booking.get());
     }
 
-    @DeleteMapping("/customer")
-    public void deleteCustomer(HttpServletRequest request, @RequestParam Integer customerId) {
-        Optional<Customer> customer = customerRepository.findById(customerId);
+    @DeleteMapping("/user")
+    public void deleteUser(HttpServletRequest request, @RequestParam Integer userId) {
+        Optional<User> user = userRepository.findById(userId);
 
-        if (customer.isPresent())
-            customerRepository.delete(customer.get());
+        if (user.isPresent())
+            userRepository.delete(user.get());
     }
 
     @DeleteMapping("/room")

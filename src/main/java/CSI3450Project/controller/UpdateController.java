@@ -20,7 +20,7 @@ import CSI3450Project.model.*;
 public class UpdateController {
     @Autowired private BookingRepository bookingRepository;
     @Autowired private BusinessRepository businessRepository;
-    @Autowired private CustomerRepository customerRepository;
+    @Autowired private UserRepository userRepository;
     @Autowired private EventRepository eventRepository;
     @Autowired private RoomRepository roomRepository;
 
@@ -81,33 +81,42 @@ public class UpdateController {
         }
     }
 
-    @PutMapping("/customer")
-    public void updateCustomer(HttpServletRequest request, @RequestBody Map<String, String> body) {
-        Optional<Customer> customer = customerRepository.findById(Integer.parseInt(body.get("id")));
+    @PutMapping("/user")
+    public void updateUser(HttpServletRequest request, @RequestBody Map<String, String> body) {
+        Optional<User> user = userRepository.findById(Integer.parseInt(body.get("id")));
 
-        if (customer.isPresent()) {
+        if (user.isPresent()) {
+            if (body.containsKey("email"))
+                user.get().setEmail(body.get("email"));
+
+            if (body.containsKey("password"))
+                user.get().setPassword(body.get("password"));
+
+            if (body.containsKey("type"))
+                user.get().setType(body.get("type"));
+
             if (body.containsKey("name"))
-                customer.get().setName(body.get("name"));
+                user.get().setName(body.get("name"));
 
             if (body.containsKey("state"))
-                customer.get().setState(body.get("state"));
+                user.get().setState(body.get("state"));
 
             if (body.containsKey("city"))
-                customer.get().setCity(body.get("city"));
+                user.get().setCity(body.get("city"));
 
             if (body.containsKey("street"))
-                customer.get().setStreet(body.get("street"));
+                user.get().setStreet(body.get("street"));
 
             if (body.containsKey("zip"))
-                customer.get().setZip(body.get("zip"));
+                user.get().setZip(body.get("zip"));
 
             if (body.containsKey("contact"))
-                customer.get().setContact(body.get("contact"));
+                user.get().setContact(body.get("contact"));
 
             if (body.containsKey("payment"))
-                customer.get().setPayment(body.get("payment"));
+                user.get().setPayment(body.get("payment"));
             
-            customerRepository.save(customer.get());
+            userRepository.save(user.get());
         }
     }
 
