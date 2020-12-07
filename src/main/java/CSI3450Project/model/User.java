@@ -10,32 +10,41 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "CUSTOMER")
+@Table(name = "USER")
 @Data
-public class Customer {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CUS_ID")
+    @Column(name = "USER_ID")
     private Integer id;
 
-    @Column(name = "CUS_NAME")
+    @Column(name = "USER_EMAIL")
+    private String email;
+
+    @Column(name = "USER_PASSWORD")
+    private String password;
+
+    @Column(name = "USER_TYPE")
+    private String type;
+
+    @Column(name = "USER_NAME")
     private String name;
 
-    @Column(name = "CUS_STATE")
+    @Column(name = "USER_STATE")
     private String state;
 
-    @Column(name = "CUS_CITY")
+    @Column(name = "USER_CITY")
     private String city;
 
-    @Column(name = "CUS_STREET")
+    @Column(name = "USER_STREET")
     private String street;
 
-    @Column(name = "CUS_ZIP")
+    @Column(name = "USER_ZIP")
     private String zip;
 
-    @Column(name = "CUS_CONTACT")
+    @Column(name = "USER_CONTACT")
     private String contact;
 
-    @Column(name = "CUS_PAYMENT")
+    @Column(name = "USER_PAYMENT")
     private String payment;
 }

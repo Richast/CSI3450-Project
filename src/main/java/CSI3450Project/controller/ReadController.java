@@ -19,7 +19,7 @@ import CSI3450Project.model.*;
 public class ReadController {
     @Autowired private BookingRepository bookingRepository;
     @Autowired private BusinessRepository businessRepository;
-    @Autowired private CustomerRepository customerRepository;
+    @Autowired private UserRepository userRepository;
     @Autowired private EventRepository eventRepository;
     @Autowired private RoomRepository roomRepository;
 
@@ -52,11 +52,21 @@ public class ReadController {
         return businessRepository.findByZip(zip);
     }
 
-    //CUSTOMER endpoints
-    @GetMapping("/customer")
-    public Customer getCustomer(HttpServletRequest request, @RequestParam Integer customerId) {
-        Optional<Customer> customer = customerRepository.findById(customerId);
-        return customer.isPresent() ? customer.get() : null;
+    //USER endpoints
+    @GetMapping("/user")
+    public User getUser(HttpServletRequest request, @RequestParam Integer userId) {
+        Optional<User> user = userRepository.findById(userId);
+        return user.isPresent() ? user.get() : null;
+    }
+
+    @GetMapping("/user/login")
+    public User loginUser(HttpServletRequest request, @RequestParam String email, @RequestParam String password) {
+        Optional<User> user = userRepository.findByEmail(email);
+
+        if (user.isPresent() && user.get().getPassword().equals(password)) 
+            return user.get();
+        
+        return null;
     }
 
     //EVENT endpoints
