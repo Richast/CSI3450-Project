@@ -134,16 +134,21 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 
 INSERT INTO BUSINESS(BUS_NAME, BUS_STATE, BUS_CITY, BUS_STREET, BUS_ZIP, BUS_CONTACT, BUS_ROOMS, BUS_AMENITIES) VALUES
-  ("The Inn at 97 Winder", "MI", "Detroit", "97 Winder St", "48201", "313-832-438", 5, "Coffee"),
-  ("DoubleTree By Hilton Bloomfield Hills Detroit", "MI", "Bloomfield Hills", "39475 Woodward Ave", "48304", "248-644-1400", 3,  "Pool"),
-  ("Extended Stay America - Auburn Hills - University Drive", "MI", "Auburn Hills", "3315 University Dr", "48326", "248-340-8888", 5, "Coffee"),
-  ('Quitzon Group', 'AZ', 'Phoenix', '39992 Melrose Street', '85083', '602-718-8072', 5, 'Pool'),
-  ('Prohaska, Nitzsche and Blick', 'FL', 'Miami', '716 Thackeray Plaza', '33142', '954-770-4646', 1, 'Bar'),
-  ('Fisher Group', 'NC', 'Gastonia', '7 Garrison Center', '28055', '704-359-2793', 5, 'Bar'),
-  ('Ernser Group', 'FL', 'Pensacola', '559 Jana Terrace', '32575', '850-356-8046', 3, 'Coffee'),
-  ('McKenzie-Zulauf', 'OH', 'Cincinnati', '0530 Village Green Point', '45208', '513-465-8432', 3, 'Spa'),
-  ('Kutch-Hilll', 'AR', 'Fort Smith', '926 Crescent Oaks Plaza', '72905', '479-683-9610', 2, 'Spa'),
-  ('Stanton-Hudson', 'WI', 'Milwaukee', '66 Valley Edge Parkway', '53210', '262-474-5861', 4, 'Bar');
+  ('Batz-Schoen', 'MI', 'Kalamazoo', '93277 Tennessee Place', '49006', '269-686-7872', 2, 'Coffee'),
+  ('Brakus-Hyatt', 'MI', 'Ann Arbor', '055 Columbus Pass', '48107', '734-551-8019', 1, 'Pool'),
+  ('Abshire Group', 'MI', 'Grand Rapids', '246 Leroy Terrace', '49560', '616-184-2639', 3, 'Pool'),
+  ('Blanda Group', 'MI', 'Detroit', '938 Muir Terrace', '48224', '313-327-3519', 5, 'Pool'),
+  ('Dibbert, O''Hara and Feil', 'MI', 'Midland', '75207 Northfield Court', '48670', '989-258-8968', 4, 'Bar'),
+  ('Jerde-Stark', 'MI', 'Ann Arbor', '00745 Dawn Hill', '48107', '734-666-3146', 4, 'Bar'),
+  ('Gulgowski, Price and McDermott', 'MI', 'Flint', '314 Mallard Trail', '48555', '810-382-3420', 5, 'Coffee'),
+  ('Mosciski-Koelpin', 'MI', 'Grand Rapids', '62 Rigney Place', '49510', '616-550-2902', 3, 'Bar'),
+  ('Fahey, Hamill and Parisian', 'MI', 'Dearborn', '94 School Plaza', '48126', '734-447-1509', 1, 'Bar'),
+  ('Leannon-Tremblay', 'MI', 'Detroit', '56 Veith Terrace', '48242', '313-573-2484', 3, 'Pool'),
+  ('Kihn-West', 'MI', 'Detroit', '583 Westerfield Alley', '48267', '313-467-1921', 4, 'Spa'),
+  ('Friesen Inc', 'MI', 'Grand Rapids', '080 Paget Parkway', '49560', '616-388-3672', 5, 'Pool'),
+  ('Feeney LLC', 'MI', 'Grand Rapids', '7 Holy Cross Terrace', '49560', '616-864-1676', 1, 'Spa'),
+  ('Wisoky and Sons', 'MI', 'Detroit', '8884 Arkansas Avenue', '48211', '810-204-3337', 4, 'Bar'),
+  ('Haley Inc', 'MI', 'Detroit', '22503 Leroy Park', '48232', '313-482-7800', 1, 'Spa');
 
 INSERT INTO USER(USER_EMAIL, USER_PASSWORD, USER_TYPE, USER_NAME, USER_STATE, USER_CITY, USER_STREET, USER_ZIP, USER_CONTACT, USER_PAYMENT) VALUES
   ('frockcliffe0@scientificamerican.com', 'lqAM0zgt61W', 'Administrator', 'Farlay Rockcliffe', 'MI', 'Detroit', '6899 Eagan Crossing', '48232', '313-568-6369', '3570849280160270'),
@@ -163,11 +168,21 @@ INSERT INTO USER(USER_EMAIL, USER_PASSWORD, USER_TYPE, USER_NAME, USER_STATE, US
   ('lcadneye@google.co.jp', 'IagiV2meA4Io', 'BnB', 'Lurlene Cadney', 'MI', 'Detroit', '3054 Arkansas Lane', '48258', '734-150-1197', '4741690112862');
 
 INSERT INTO EVENT(EVENT_NAME, EVENT_STATE, EVENT_CITY, EVENT_STREET, EVENT_ZIP, EVENT_CONTACT, EVENT_DATE, EVENT_PRICE, BUS_ID) VALUES
-  ('Sonair', 'CA', 'Los Angeles', '21 Twin Pines Road', '48201', '323-867-9461', '2020-12-12', 93.55, 1),
-  ('Viva', 'TX', 'Fort Worth', '93010 Vermont Court', '72905', '817-568-5006', '2020-12-12', 34.17, 8),
-  ('Konklux', 'OH', 'Dayton', '9 Blackbird Trail', '28055', '937-760-1985', '2021-01-14', 51.81, 7),
-  ('Stronghold', 'CA', 'Carlsbad', '6102 Bobwhite Crossing', '32575', '760-244-6368', '2021-01-11', 37.17, 8),
-  ('Ronstring', 'WI', 'Milwaukee', '368 Doe Crossing Way', '53210', '262-691-4933', '2021-01-18', 20.22, 2);
+  ('Moore LLC', 'MI', 'Saginaw', '97882 Park Meadow Lane', '48604', '989-704-3631', '2021-01-24', 10.02, 8),
+  ('Medhurst, Kling and Bauch', 'MI', 'Detroit', '77886 Haas Park', '48242', '313-759-6199', '2020-12-31', 107.47, 5),
+  ('Hettinger and Sons', 'MI', 'Lansing', '028 Sage Circle', '48956', '517-639-5957', '2021-01-13', 118.55, 2),
+  ('Thompson-Hoeger', 'MI', 'Grand Rapids', '08 Jackson Terrace', '49560', '616-353-9475', '2020-12-13', 224.73, 6),
+  ('Schuster Inc', 'MI', 'Lansing', '868 Heffernan Avenue', '48930', '517-681-2413', '2021-01-20', 25.76, 4),
+  ('Beatty, Block and Deckow', 'MI', 'Detroit', '285 Hoard Junction', '48224', '313-520-3893', '2021-01-09', 77.86, 3),
+  ('Schneider, Runolfsson and Becker', 'MI', 'Detroit', '1374 Golden Leaf Circle', '48224', '313-198-6729', '2021-01-29', 87.2, 5),
+  ('Effertz, Cummerata and Bode', 'MI', 'Detroit', '71 Parkside Parkway', '48267', '313-376-9576', '2021-01-07', 57.75, 3),
+  ('Reichert-Haag', 'MI', 'Grand Rapids', '44796 Kropf Place', '49560', '616-297-6519', '2021-01-06', 41.9, 4),
+  ('Rodriguez, Heidenreich and Marks', 'MI', 'Detroit', '95126 Riverside Point', '48258', '313-754-1496', '2020-12-19', 113.49, 11),
+  ('Borer, Kovacek and Feeney', 'MI', 'Detroit', '43 Browning Crossing', '48224', '313-616-5539', '2021-01-03', 122.25, 1),
+  ('Block and Sons', 'MI', 'Southfield', '0 Kensington Circle', '48076', '248-395-7037', '2021-01-14', 131.6, 15),
+  ('Lynch-Gutkowski', 'MI', 'Southfield', '99181 Rigney Crossing', '48076', '248-883-4704', '2021-01-01', 118.28, 9),
+  ('Franecki LLC', 'MI', 'Lansing', '798 Arkansas Junction', '48919', '517-934-0999', '2020-12-19', 220.85, 14),
+  ('Barton, Sporer and Weber', 'MI', 'Battle Creek', '191 Laurel Avenue', '49018', '269-316-9165', '2020-12-17', 117.28, 4);
 
 INSERT INTO ROOM(ROOM_NUM, ROOM_PRICE, BUS_ID) VALUES
   (1, 40.00, 1),
