@@ -47,8 +47,13 @@ public class ReadController {
         return business.isPresent() ? business.get() : null;
     }
 
-    @GetMapping("/businesses")
-    public List<Business> getBusinesses(HttpServletRequest request, @RequestParam String zip) {
+    @GetMapping("/businesses/all")
+    public Iterable<Business> getBusinesses(HttpServletRequest request) {
+        return businessRepository.findAll();
+    }
+
+    @GetMapping("/businesses/zip")
+    public List<Business> getBusinessesByZip(HttpServletRequest request, @RequestParam String zip) {
         return businessRepository.findByZip(zip);
     }
 
@@ -76,8 +81,13 @@ public class ReadController {
         return event.isPresent() ? event.get() : null;
     }
 
-    @GetMapping("/events")
-    public List<Event> getEvents(HttpServletRequest request, @RequestParam String zip) {
+    @GetMapping("/events/all")
+    public Iterable<Event> getEvents(HttpServletRequest request) {
+        return eventRepository.findAll();
+    }
+
+    @GetMapping("/events/zip")
+    public List<Event> getEventsByZip(HttpServletRequest request, @RequestParam String zip) {
         return eventRepository.findByZip(zip);
     }
 
@@ -88,7 +98,6 @@ public class ReadController {
         return room.isPresent() ? room.get() : null;
     }
 
-    
     @GetMapping("/room/business")
     public List<Room> getRoomsForBusiness(HttpServletRequest request, @RequestParam Integer businessId) {
         return roomRepository.findByBusinessId(businessId);
