@@ -1,0 +1,16 @@
+.quickInfo {
+    background: rgb(46, 57, 70);
+    margin: 0;
+    padding: 0;
+    width: 20vw;
+    height: 75vh;
+}
+
+.about-container {
+    margin-top: 20%;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background: rgb(45, 57, 71);
+    height: 60vh;
+    width: 20vw;
+  }
