@@ -1,0 +1,24 @@
+.navbar {
+    height: 5vh;
+    width: 100vw;
+    background: rgb(34, 43, 53);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-links {
+    display:flex;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    width: 20vw;
+    height: 10vh;
+    margin: 1%;
+    text-align: center;
+    justify-content: space-around;
+    list-style: none;
+}
+

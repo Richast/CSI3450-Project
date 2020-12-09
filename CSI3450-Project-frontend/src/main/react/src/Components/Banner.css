@@ -1,0 +1,13 @@
+.banner {
+    margin: 0;
+    padding: 0;
+    max-height: 20vh;
+    width: 100vw;
+    display: flex;
+    background: rgb(45, 57, 71);
+}
+
+.banner-img {
+    min-width: 20vw;
+    min-height: 20vh;
+  }
