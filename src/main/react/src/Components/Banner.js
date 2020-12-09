@@ -1,30 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
+import './Banner.css';
 
-import logo from './../logo.svg';
+import blackcreek from './../Images/blackcreek.jpg';
+import dowagiacwoods from './../Images/dowagiacwoods.jpg';
+import crisppoint from './../Images/crisppoint.jpg';
+import harveysrocks from './../Images/harveysrocks.jpg';
+import olsonfalls from './../Images/olsonfalls.jpg';
 
-function Hidden(props) {
-    return(null);
-}
-
-function FullBanner(props) {
+function Banner() {
     return(
         <div className="banner">
-            <img src={logo} />
-            <img src={logo} />
-            <img src={logo} />
-            <img src={logo} />
-            <img src={logo} />
+            <img className="banner-img" src={blackcreek} />
+            <img className="banner-img" src={dowagiacwoods} />
+            <img className="banner-img" src={crisppoint} />
+            <img className="banner-img" src={harveysrocks} />
+            <img className="banner-img" src={olsonfalls} />
         </div>
     );
-}
-
-function Banner(props) {
-    const visible = props.visible;
-
-    if(visible) {
-        return <FullBanner />
-    }
-    return <Hidden />
 }
 
 export default Banner;
