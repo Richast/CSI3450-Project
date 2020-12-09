@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import CSI3450Project.dao.*;
 import CSI3450Project.model.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/csi3450project/v1")
 public class DeleteController {
     @Autowired private BookingRepository bookingRepository;

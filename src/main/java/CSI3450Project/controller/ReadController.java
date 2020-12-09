@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ import CSI3450Project.dao.*;
 import CSI3450Project.model.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/csi3450project/v1")
 public class ReadController {
     @Autowired private BookingRepository bookingRepository;
