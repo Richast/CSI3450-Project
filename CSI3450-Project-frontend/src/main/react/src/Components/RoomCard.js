@@ -7,7 +7,7 @@ const RoomCard = (props) => {
     const [dateInput, setDateInput] = useState(false);
     const [date, setDate] = useState('');
     const [duration, setDuration] = useState(0);
-
+    const [notLoggedIn, setNotLoggedIn] = useState(true);
     const [validInput, setValidInput] = useState(false);
 
     const [booking, setBooking] = useState({
@@ -46,7 +46,12 @@ const RoomCard = (props) => {
 
         }
         
-        await props.db.post('/booking', booking).then(response => setBooked(!booked));
+        if (props.userLoggedIn) {
+            console.log("booked");
+            await props.db.post('/booking', booking).then(response => setBooked(!booked));
+        } else {
+            window.alert("Please log in to book a room");
+        }
         var form = document.getElementById('bookingForm');
         form.reset();
     }

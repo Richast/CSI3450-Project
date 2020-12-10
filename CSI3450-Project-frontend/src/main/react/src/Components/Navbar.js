@@ -7,6 +7,7 @@ function Navbar(props) {
     const [userLog, setuserLog] = useState(false);
     const handleLogout = async e => {
         props.setLoggedIn(false);
+        localStorage.clear();
         console.log(props.userLoggedIn);
     }
 
@@ -27,22 +28,14 @@ function Navbar(props) {
                             </li>
                         
                         
-                            <li className="nav-links-events">
-                                <Link to="/events">Events</Link>
-                            </li>
-                        
-                        
-                        
                             <li className="nav-links-login" style={(props.userLoggedIn === false) ? {} : {display:'none'}}>
                                 <Link to="/login">Log In</Link>
                             </li>
-                        
                     
                         
                             <li className="nav-links-account" style={(props.userLoggedIn === true) ? {} : {display:'none'}}>
                                 <Link to="/account">Account</Link>
                             </li>
-                        
                         
                             
                             <li className="nav-links-logout" >

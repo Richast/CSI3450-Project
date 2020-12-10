@@ -48,16 +48,10 @@ function App() {
               () => <Locate 
               pageName={"LocatePage"}
               userLoggedIn={userLoggedIn}
+              setLoggedIn={setLoggedIn}
               userId={userId}
               innId={innId}
               setInnId={setInnId}
-              />}
-            />
-            <Route path="/events" exact component={
-              () => <EventsPage 
-                pageName={"EventsPage"}
-                userLoggedIn={userLoggedIn} 
-                userId={userId}
               />}
             />
             <Route path="/login" exact component={
@@ -79,6 +73,7 @@ function App() {
             <Route path="/account" exact component={
               () => <Account 
                 userLoggedIn={userLoggedIn}
+                setLoggedIn={setLoggedIn}
                 userId={userId}
               />} 
             />

@@ -62,21 +62,23 @@ function Login() {
 function Register(props) {
     return(
         <div className="quickInfo">
-            <h2>For Member Registration</h2>
-            <p>To become a Member Bed and Breakfast you will need to provide information on 
-                on your establishment, and we will review your application to determine if you
-                are a good fit for our organization.
-            </p>
-            <br />
-            <h2>Are you an Event organizer?</h2>
-            <p>We now also offer an account for Event organizers. You need not apply for this, but merely
-                create an Event account.
-            </p>
-            <br />
-            <h2>Just a Bed and Breakfast customer?</h2>
-            <p>Having a customer account is not necessary to take advantage of our booking system,
-                but having one can expedite the process and ensure you get the reservations you desire.
-            </p>
+            <div className="registration-container">
+                <h2>For Member Registration</h2>
+                <p>To become a Member Bed and Breakfast you will need to provide information on 
+                    on your establishment, and we will review your application to determine if you
+                    are a good fit for our organization.
+                </p>
+                <br />
+                <h2>Are you an Event organizer?</h2>
+                <p>We now also offer an account for Event organizers. You need not apply for this, but merely
+                    create an Event account.
+                </p>
+                <br />
+                <h2>Just a Bed and Breakfast customer?</h2>
+                <p>Having a customer account is necessary to take advantage of our booking system,
+                    so be sure to create a free account before you plan your next trip.
+                </p>
+            </div>
         </div>
     )
 }

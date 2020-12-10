@@ -2,10 +2,11 @@
     background: rgb(46, 57, 70);
     padding: 0;
     margin: 0;
+    color: white;
 }
 .events {
-    
-    width: 20vw;
+    color: white;
+    width: 25vw;
     height: 65vh;
     overflow: auto;
     -ms-overflow-style: none;
@@ -16,14 +17,26 @@
     display: none;
 }
 
-
-
-.eventCard:link  {
-    text-decoration: none;
-    color: white;
+.eventCard {
+    display: inline-block;
+    color:white;
+    border-style: solid;
+    background: rgb(46, 57, 70);
 }
 
-.eventCard:visited {
-    text-decoration: none;
-    color: white;
+.eventCard:hover {
+    background: rgb(55, 74, 97);
 }
+
+.eventCardName {
+    display: inline-block;
+    width: 14vw;
+
+}
+
+.eventCardAddress {
+    display: inline-block;
+    width: 9vw;
+
+}
+

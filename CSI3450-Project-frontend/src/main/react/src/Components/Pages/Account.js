@@ -15,6 +15,8 @@ function Account(props) {
             <Info 
                 pageName="AccountPage"
                 userId={props.userId}
+                userLoggedIn={props.userLoggedIn}
+                setLoggedIn={props.setLoggedIn}
             />
             <Events />
         </div>

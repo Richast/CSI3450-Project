@@ -27,6 +27,10 @@ function Events(props) {
                         name={event.name}
                         date={event.date}
                         price={event.price}
+                        street={event.street}
+                        city={event.city}
+                        state={event.state}
+                        zip={event.zip}
                     />
                 ))}
             </div>

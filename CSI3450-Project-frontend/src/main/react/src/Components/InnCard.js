@@ -27,11 +27,6 @@ const InnCard = (props) => {
         props.db.get('/booking/business?businessId='+props.id).then(response=> setBookings(response.data));
     }, []);
 
-    const handleSubmit = async e => {
-        e.preventDefault();
-
-    }
-
     return(
         <div className="innCard">
             <div className="innCardButtonDiv" style={selected ? {display: 'none'} : {}}>
@@ -47,15 +42,15 @@ const InnCard = (props) => {
                     <p>{props.city}, {props.state} {props.zip}</p>
                     <p>Phone: {props.contact}</p>
                 </div>
-
-                {bookings.map((booking) => (
-                    <div>
-                        <h3>Upcoming Bookings</h3>
-                        <p>Room #{booking.roomId}</p>
-                        <p>Date: {booking.date} for {booking.duration} day(s)</p>
-                    </div>
-                ))}
-
+                <div className="innCardItem">
+                    <h3>Upcoming Bookings</h3>
+                        {bookings.map((booking) => (
+                            <>
+                                <p>Room #{booking.roomId}</p>
+                                <p>Date: {booking.date} for {booking.duration} day(s)</p>
+                            </>
+                        ))}
+                </div>
                 {rooms.map((room) => (
                     <RoomCard 
                         db={props.db}
@@ -65,6 +60,7 @@ const InnCard = (props) => {
                         id={props.id}
                         roomId={room.id}
                         bookings={bookings}
+                        userLoggedIn={props.userLoggedIn}
                     />
                 ))}
             </div>

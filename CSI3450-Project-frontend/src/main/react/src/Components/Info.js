@@ -24,7 +24,8 @@ function Info(props) {
     } else if (pageName === "LocatePage") {
         return(
             <Locate 
-
+                userLoggedIn={props.userLoggedIn}
+                setLoggedIn={props.setLoggedIn}
 
             />
         );
@@ -34,6 +35,8 @@ function Info(props) {
         return <Register />
     } else if (pageName === "AccountPage") {
         return <Account 
+                    userLoggedIn={props.userLoggedIn}
+                    setLoggedIn={props.setLoggedIn}
                     userId={props.userId}
                     db={db}
                 />
@@ -124,6 +127,7 @@ function Locate(props) {
                             contact={inn.contact}
                             roomAmount={inn.roomAmount}
                             amenities={inn.amenities}
+                            userLoggedIn={props.userLoggedIn}
                         />
                     </div>
                 ))}
@@ -245,40 +249,45 @@ function Register(props) {
 <           div className="registerForm" >
                 <form id="register">
                     <h1>Michigan Bed and Breakfast Guild User Registration</h1>
-
-                    <p>Account type: {account.type}</p>
-                    <button onClick={(e) => {e.preventDefault(); setAccount((prevState) => ({...prevState, type: 'bnb'}))}}>BnB</button>
-                    <button onClick={(e) => {e.preventDefault(); setAccount((prevState) => ({...prevState, type: 'customer'}))}}>Customer</button>
-                    <button onClick={(e) => {e.preventDefault(); setAccount((prevState) => ({...prevState, type: 'event'}))}}>Event</button><br />
-
-                    <label htmlFor="name">Name: </label>
-                    <input type="text" onChange={({target}) => setAccount((prevState) => ({...prevState, name: target.value}))}/>
-                    <br />
-                    <label htmlFor="email">Email: </label>
-                    <input type="text" onChange={({target}) => setAccount((prevState) => ({...prevState, email: target.value}))} />
-                    <br />
-                    <label htmlFor="password">Password: </label>
-                    <input type="password" onChange={({target}) => setAccount((prevState) => ({...prevState, password: target.value}))} />
-                    <br />
-                    <label htmlFor="contact">Contact Phone: </label>
-                    <input type="text" onChange={({target}) => setAccount((prevState) => ({...prevState, contact: target.value}))} />
-                    <br />
-
-                    <p><strong>Address</strong></p>
-                    <label htmlFor="street">Street: </label>
-                    <input type="text" onChange={({target}) => setAccount((prevState) => ({...prevState, street: target.value}))} />
-                    <br />
-                    <label htmlFor="city">City: </label>
-                    <input type="text" onChange={({target}) => setAccount((prevState) => ({...prevState, city: target.value}))} />
-                    <br />
-                    <label htmlFor="zip">Zip Code: </label>
-                    <input type="text" onChange={({target}) => setAccount((prevState) => ({...prevState, zip: target.value}))} />
-                    <br />
+                    <div className="accountType">
+                        <p>Account type: {account.type}</p>
+                        <button onClick={(e) => {e.preventDefault(); setAccount((prevState) => ({...prevState, type: 'bnb'}))}}>BnB</button>
+                        <button onClick={(e) => {e.preventDefault(); setAccount((prevState) => ({...prevState, type: 'customer'}))}}>Customer</button>
+                        <button onClick={(e) => {e.preventDefault(); setAccount((prevState) => ({...prevState, type: 'event'}))}}>Event</button><br />
+                    </div>
+                    <div className="personalForm">
+                        <label htmlFor="name">Name: </label>
+                        <input type="text" onChange={({target}) => setAccount((prevState) => ({...prevState, name: target.value}))}/>
+                        <br />
+                        <label htmlFor="email">Email: </label>
+                        <input type="text" onChange={({target}) => setAccount((prevState) => ({...prevState, email: target.value}))} />
+                        <br />
+                        <label htmlFor="password">Password: </label>
+                        <input type="password" onChange={({target}) => setAccount((prevState) => ({...prevState, password: target.value}))} />
+                        <br />
+                        <label htmlFor="contact">Contact Phone: </label>
+                        <input type="text" onChange={({target}) => setAccount((prevState) => ({...prevState, contact: target.value}))} />
+                        <br />
+                    </div>
+                    <div className="addressForm">
+                        <p><strong>Address</strong></p>
+                        <label htmlFor="street">Street: </label>
+                        <input type="text" onChange={({target}) => setAccount((prevState) => ({...prevState, street: target.value}))} />
+                        <br />
+                        <label htmlFor="city">City: </label>
+                        <input type="text" onChange={({target}) => setAccount((prevState) => ({...prevState, city: target.value}))} />
+                        <br />
+                        <label htmlFor="zip">Zip Code: </label>
+                        <input type="text" onChange={({target}) => setAccount((prevState) => ({...prevState, zip: target.value}))} />
+                        <br />
+                    </div>
                 </form>
+                <br />
+                <Link to='/login'>
+                    <button className="submitButton" onClick={handleSubmit}>Submit</button>
+                </Link>
             </div>
-            <Link to='/login'>
-                <button onClick={handleSubmit}>Submit</button>
-            </Link>
+            
             <br />
             <br />
             <h1 style={!accountCreated ? {display:'none'} : {}}>Congratulations, your account was successfully created!</h1>
@@ -300,7 +309,7 @@ function Account(props) {
     useEffect(() => {
         props.db.get('/user?userId='+localStorage.getItem('userId')).then(response => setUser(response.data));
         props.db.get('/booking/customer?customerId='+localStorage.getItem('userId')).then(response => setBookings(response.data));
-        console.log(bookings[0]);
+        console.log(bookings);
     }, []);
 
     const handleSubmit = async e => {
@@ -311,13 +320,16 @@ function Account(props) {
 
     const deleteAccount = async e => {
         e.preventDefault();
-        await props.db.delete('/user', {data: user.id}).then(response => console.log('deleted'));
+        await props.db.delete('/user?userId='+user.id).then(response => console.log('deleted'));
+        props.setLoggedIn(false);
         localStorage.clear();
     }
 
     const handleCancel = async (booking) => {
-        await props.db.delete('/booking', {data: booking.bookingId}).then(response => console.log('deleted'));
-
+        window.alert("Your booking for "+booking.date+" has been canceled");
+        await props.db.delete('/booking?bookingId='+booking.id).then(response => console.log('deleted'));
+        props.db.get('/booking/customer?customerId='+localStorage.getItem('userId')).then(response => setBookings(response.data));
+        
     }
 
     return(

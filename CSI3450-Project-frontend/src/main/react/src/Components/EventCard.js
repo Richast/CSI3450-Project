@@ -1,16 +1,20 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
 import './Events.css';
 
 const EventCard = (props) => {
     return(
-        <Link to="/events" className="eventCard">
-            <div>
-                <h3>{props.name}</h3>
-                <p>Date: {props.date}</p>
-                <p>Price: ${props.price} / person</p>
+            <div className="eventCard">
+                <div className="eventCardName">
+                    <h3>{props.name}</h3>
+                    <p>Date: {props.date}</p>
+                    <p>Price: ${props.price} / person</p>
+                </div>    
+                <div className="eventCardAddress">
+                    <h3>Address</h3>
+                    <p>{props.street}</p>
+                    <p>{props.city}, {props.state} {props.zip}</p>
+                </div>
             </div>
-        </Link>
     );
 }
 
