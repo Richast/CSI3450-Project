@@ -6,7 +6,7 @@ import './Events.css';
 
 function Events(props) {
     const db = Axios.create({
-        baseURL: `http://localhost:8080/csi3450project/v1`
+        baseURL: `http://192.168.1.101:8080/csi3450project/v1`
     });
 
     const [events, setEvents] = useState([]);
@@ -15,14 +15,6 @@ function Events(props) {
         db.get('/events/all').then(response => setEvents(response.data));
     }, []);
 
-
-    const [eventView, setEventview] = useState(() => {
-        return "";
-    });
-    //Need to use componentDidMount for this since it will only run once
-    const handleEvent = (e) => {
-        props.setEventview(e);
-    }
     
     return(
         <div className="events-container">
@@ -35,6 +27,10 @@ function Events(props) {
                         name={event.name}
                         date={event.date}
                         price={event.price}
+                        street={event.street}
+                        city={event.city}
+                        state={event.state}
+                        zip={event.zip}
                     />
                 ))}
             </div>

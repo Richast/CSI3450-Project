@@ -14,14 +14,9 @@ function Login(props) {
                 userId={props.userId}
                 setUserId={props.setUserId}
                 userLoggedIn={props.userLoggedIn} 
-                handleSubmit={props.handleSubmit} 
-                setUsername={props.setUsername}
-                setPassword={props.setPassword}
-                usernameCallback={props.usernameCallback}
-                passwordCallback={props.passwordCallback}
-                axiosGet={props.axiosGet}
+                setLoggedIn={props.setLoggedIn}
             />
-            <Events axiosGet={props.axiosGet}/>
+            <Events />
         </div>
     );
 }

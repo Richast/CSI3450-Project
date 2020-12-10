@@ -12,6 +12,8 @@ function Locate(props) {
         <div className="components-container">
             <QuickInfo />
             <Info 
+                userLoggedIn={props.userLoggedIn}
+                setLoggedIn={props.setLoggedIn}
                 pageName={props.pageName}
                 innId={props.innId}
                 setInnId={props.setInnId}

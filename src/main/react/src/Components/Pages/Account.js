@@ -3,6 +3,7 @@ import './../../App.css';
 
 import QuickInfo from './../QuickInfo.js';
 import Info from './../Info.js';
+import Events from './../Events.js';
 
 function Account(props) {
     return(
@@ -14,8 +15,10 @@ function Account(props) {
             <Info 
                 pageName="AccountPage"
                 userId={props.userId}
+                userLoggedIn={props.userLoggedIn}
+                setLoggedIn={props.setLoggedIn}
             />
-
+            <Events />
         </div>
     );
 }
