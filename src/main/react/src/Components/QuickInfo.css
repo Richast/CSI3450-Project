@@ -1,0 +1,27 @@
+.quickInfo {
+    background: rgb(46, 57, 70);
+    margin: 0;
+    padding: 0;
+    width: 20vw;
+    height: 75vh;
+    color: white
+}
+
+.about-container {
+    margin-top: 20%;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background: rgb(45, 57, 71);
+    height: 60vh;
+    width: 20vw;
+  }
+
+  .registration-container {
+    margin-top: 20%;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background: rgb(45, 57, 71);
+    height: 60vh;
+    width: 18vw;
+    margin-left: 10px;
+  }

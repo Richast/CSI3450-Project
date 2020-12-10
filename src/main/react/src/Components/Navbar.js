@@ -1,44 +1,53 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import './Navbar.css';
 import './../App.css';
 
-
-function LoggedIn(props) {
-    return(
-        <nav>
-            <ul className="navbar">
-                <Link to="/" ><li>Home</li></Link>
-                <Link to="/Locate" ><li>Locate</li></Link>
-                <Link to="/Events" ><li>Events</li></Link>
-                <Link to="/Account" ><li>Account</li></Link>
-            </ul>
-        </nav>
-    );
-}
-
-function NotLoggedIn(props) {
-    return(
-        <nav>
-            <ul className="navbar">
-                <Link to="/" ><li>Home</li></Link>
-                <Link to="/Locate" ><li>Locate</li></Link>
-                <Link to="/Events" ><li>Events</li></Link>
-                <Link to="/Login" ><li>Log In / Register</li></Link>
-            </ul>
-        </nav>
-    );
-}
-
-//Based on demo from Reactjs.org
 function Navbar(props) {
-    const loggedIn = props.loggedIn;
-
-    if (loggedIn) {
-        return <LoggedIn />
+    const [userLog, setuserLog] = useState(false);
+    const handleLogout = async e => {
+        props.setLoggedIn(false);
+        localStorage.clear();
+        console.log(props.userLoggedIn);
     }
-    return <NotLoggedIn />
-}  
 
-
+    return(
+        <>
+            <nav className="navbar">
+                <div className="navbar-container">
+                    <Link to="/">MBBG<i className="fas fa-atlas" /></Link>
+                    <ul className="nav-links">
+                        
+                            <li className="nav-links-home">
+                                <Link to="/">Home</Link>
+                            </li>
+                        
+                        
+                            <li className="nav-links-locate">
+                                <Link to="/locate">Locate</Link>
+                            </li>
+                        
+                        
+                            <li className="nav-links-login" style={(props.userLoggedIn === false) ? {} : {display:'none'}}>
+                                <Link to="/login">Log In</Link>
+                            </li>
+                    
+                        
+                            <li className="nav-links-account" style={(props.userLoggedIn === true) ? {} : {display:'none'}}>
+                                <Link to="/account">Account</Link>
+                            </li>
+                        
+                            
+                            <li className="nav-links-logout" >
+                                <Link to="/"><button onClick={handleLogout} style={(props.userLoggedIn === true) ? {} : {display:'none'}}>Log Out</button></Link> 
+                            </li>
+                            
+                               
+                    </ul>
+                </div>
+            </nav>
+        </>
+    );
+}
 
 export default Navbar;

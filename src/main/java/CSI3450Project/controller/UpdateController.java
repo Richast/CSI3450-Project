@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import CSI3450Project.dao.*;
 import CSI3450Project.model.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/csi3450project/v1")
 public class UpdateController {
     @Autowired private BookingRepository bookingRepository;

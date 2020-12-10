@@ -1,43 +1,90 @@
-import React, {useState} from 'react';
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Banner from './Components/Banner.js';
-import Navbar from './Components/Navbar.js';
-import QuickInfo from './Components/QuickInfo.js';
-import Events from './Components/Events.js';
-import Info from './Components/Info.js';
+import React, {useEffect, useState} from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-import HomePage from './Pages/HomePage.js';
-import LocatePage from './Pages/LocatePage.js';
-import EventsPage from './Pages/EventsPage.js';
-import LoginPage from './Pages/LogInPage.js';
-
+import Axios from 'axios';
 import './App.css';
+
+import Navbar from './Components/Navbar.js';
+import Banner from './Components/Banner.js';
+
+import Home from './Components/Pages/Home.js';
+import Locate from './Components/Pages/Locate.js';
+import EventsPage from './Components/Pages/EventsPage.js';
+import Login from './Components/Pages/Login.js';
+import Logout from './Components/Pages/Logout.js';
+import Account from './Components/Pages/Account.js';
+import Register from './Components/Pages/Register.js';
+
 
 function App() {
 
-  const [page, setPage] = useState([
-    {pageName: "homepage", loggedIn: false, banner: true},
-    {pageName: "bnbPage", loggedIn: false, banner: false},
-    {pageName: "booking", loggedIn: false, banner: false},
-    {pageName: "login", loggedIn: false, banner: true},
-    {pageName: "events", loggedIn: false, banner: true},
-    {pageName: "account", loggedIn: false, banner: false}
-  ]);
+  const [userLoggedIn, setLoggedIn] = useState(false);
+  const [userId, setUserId] = useState('');
+
+  const [innId, setInnId] = useState('');
+
+  useEffect(() => {
+    if (localStorage.getItem('loggedIn')) {
+      setLoggedIn(true);  
+    }
+  }, []);
 
   return (
-      <Router>
-        <div className="App">
-        
-          <Switch>
-            <Route path="/" exact component={HomePage} />
-            <Route path="/Locate" exact component={LocatePage} />
-            <Route path="/Events" exact component={EventsPage} />
-            <Route path="/Login" exact component={LoginPage} />
-          </Switch>
-        </div>
-      </Router>
+    <div className="App">
       
-    
+        <Router>
+          <Banner />
+          <Navbar userLoggedIn={userLoggedIn} setLoggedIn={setLoggedIn}/>
+          <Switch >
+            <Route path="/" exact component={
+              () => <Home 
+              pageName={"HomePage"}
+              userLoggedIn={userLoggedIn} 
+              userId={userId}
+              />} 
+              
+            />
+            <Route path="/locate" exact component={
+              () => <Locate 
+              pageName={"LocatePage"}
+              userLoggedIn={userLoggedIn}
+              setLoggedIn={setLoggedIn}
+              userId={userId}
+              innId={innId}
+              setInnId={setInnId}
+              />}
+            />
+            <Route path="/login" exact component={
+              () => <Login 
+              pageName={"LoginPage"}
+              userId={userId}
+              setUserId={setUserId}
+              userLoggedIn={userLoggedIn} 
+              setLoggedIn={setLoggedIn}
+              />}
+            />
+            <Route path="/logout" exact component={
+              () => <Logout 
+                userLoggedIn={userLoggedIn}
+                userId={userId}
+                setUserId={setUserId}
+              />} 
+            />
+            <Route path="/account" exact component={
+              () => <Account 
+                userLoggedIn={userLoggedIn}
+                setLoggedIn={setLoggedIn}
+                userId={userId}
+              />} 
+            />
+            <Route path="/register" exact component={
+              () => <Register 
+              />
+            } />
+          </Switch>
+        </Router>
+      
+    </div>
   );
 }
 
