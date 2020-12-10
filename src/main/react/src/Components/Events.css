@@ -1,0 +1,29 @@
+.events-container {
+    background: rgb(46, 57, 70);
+    padding: 0;
+    margin: 0;
+}
+.events {
+    
+    width: 20vw;
+    height: 65vh;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.events::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+.eventCard:link  {
+    text-decoration: none;
+    color: white;
+}
+
+.eventCard:visited {
+    text-decoration: none;
+    color: white;
+}

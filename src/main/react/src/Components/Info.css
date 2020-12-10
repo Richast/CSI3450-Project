@@ -1,0 +1,22 @@
+.info {
+    background: rgb(46, 57, 70);
+    margin: 0;
+    padding: 0;
+    width: 60vw;
+    height: 75vh;
+}
+
+.locate-container {
+    color: white;
+    text-align: left;
+    font-weight: bold;
+}
+
+.login-container {
+    color: white;
+    text-align: center;
+}
+
+.emailLabel {
+    margin-top: 10%;
+}
