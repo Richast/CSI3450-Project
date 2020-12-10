@@ -4,29 +4,11 @@ import './Navbar.css';
 import './../App.css';
 
 function Navbar(props) {
-    const [click, setClick] = useState(false);
-    const [button, setButton] = useState(false);
-
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [user, setUser] = useState();
-    //const [userLoggedIn, setLoggedIn] = useState(true);
-
-    const handleClick = () => {
-        setClick(!click);
-    };
-
-    /*const handleLogStatus = () => {
-        setLoggedIn(!userLoggedIn);
-    };*/
-
-    /*useEffect(() => {
-        const loggedInUser = localStorage.getItem("user");
-        if(loggedInUser) {
-            const foundUser = JSON.parse(loggedInUser);
-            setUser(foundUser);
-        }
-    }, []);*/
+    const [userLog, setuserLog] = useState(false);
+    const handleLogout = async e => {
+        props.setLoggedIn(false);
+        console.log(props.userLoggedIn);
+    }
 
     return(
         <>
@@ -34,36 +16,40 @@ function Navbar(props) {
                 <div className="navbar-container">
                     <Link to="/">MBBG<i className="fas fa-atlas" /></Link>
                     <ul className="nav-links">
-                        <Link to="/">
+                        
                             <li className="nav-links-home">
-                                Home
+                                <Link to="/">Home</Link>
                             </li>
-                        </Link>
-                        <Link to="/locate">
+                        
+                        
                             <li className="nav-links-locate">
-                                Locate
+                                <Link to="/locate">Locate</Link>
                             </li>
-                        </Link>
-                        <Link to="/events">
+                        
+                        
                             <li className="nav-links-events">
-                                Events
+                                <Link to="/events">Events</Link>
                             </li>
-                        </Link>
-                        <Link to="/login">
-                            <li className="nav-links-login" style={props.userLoggedIn ? {display:'none'} : {}}>
-                                Log In
+                        
+                        
+                        
+                            <li className="nav-links-login" style={(props.userLoggedIn === false) ? {} : {display:'none'}}>
+                                <Link to="/login">Log In</Link>
                             </li>
-                        </Link>
-                        <Link to="/account">
-                            <li className="nav-links-account" style={!props.userLoggedIn ? {display:'none'} : {}}>
-                                Account
+                        
+                    
+                        
+                            <li className="nav-links-account" style={(props.userLoggedIn === true) ? {} : {display:'none'}}>
+                                <Link to="/account">Account</Link>
                             </li>
-                        </Link>
-                        <Link to="/logout">
-                            <li className="nav-links-logout" style={!props.userLoggedIn ? {display:'none'} : {}}>
-                                Log Out
+                        
+                        
+                            
+                            <li className="nav-links-logout" >
+                                <Link to="/"><button onClick={handleLogout} style={(props.userLoggedIn === true) ? {} : {display:'none'}}>Log Out</button></Link> 
                             </li>
-                        </Link>
+                            
+                               
                     </ul>
                 </div>
             </nav>

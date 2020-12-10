@@ -15,14 +15,6 @@ function Events(props) {
         db.get('/events/all').then(response => setEvents(response.data));
     }, []);
 
-
-    const [eventView, setEventview] = useState(() => {
-        return "";
-    });
-    //Need to use componentDidMount for this since it will only run once
-    const handleEvent = (e) => {
-        props.setEventview(e);
-    }
     
     return(
         <div className="events-container">

@@ -3,68 +3,41 @@ import {Link} from 'react-router-dom';
 import Axios from 'axios';
 import './Info.css';
 
-import Room from './Room.js';
 import InnCard from './InnCard.js';
 
 function Info(props) {
-    const [searchValue, setSearch] = useState(() => {
-        return 0;
+    const db = Axios.create({
+        baseURL: `http://localhost:8080/csi3450project/v1`
     });
-    
-    const [innId, setInnId] = useState('');
+
     const [pageName, setPageName] = useState(props.pageName);
-
-    const axiosGet = async e => {
-        props.api.get(e).then(response => {
-            console.log(response.data)
-            props.setNearbyInn(response.data);
-            console.log(props.nearbyInn);
-        });
-    }
-
-    const handleChange = async e => {
-        e.preventDefault();
-        console.log(searchValue);
-        axiosGet('/businesses/zip?zip=' + searchValue);
-        console.log(props.nearbyInn);
-    }
 
     if(pageName === "LoginPage") {
         return(
             <InfoLogin 
                 userLoggedIn={props.userLoggedIn} 
+                setLoggedIn={props.setLoggedIn}
                 userId={props.userId}
                 setUserId={props.setUserId}
-                handleSubmit={props.handleSubmit} 
-                setUsername={props.setUsername}
-                setPassword={props.setPassword}
-                usernameCallback={props.usernameCallback}
-                passwordCallback={props.passwordCallback}
-                axiosGet={props.axiosGet}
             />
         );
     } else if (pageName === "LocatePage") {
         return(
             <Locate 
-                axiosGet={axiosGet}
-                handleChange={handleChange}
-                setSearch={setSearch}
-                setInnId={setInnId}
+
+
             />
         );
     } else if (pageName === "EventsPage") {
         return <Events eventView={props.eventView} />
-    } else if (pageName === "BookingPage") {
-        return <Booking 
-                innId={innId}
-                setInnId={setInnId}
-                handleSubmit={props.handleSubmit}
-                />
-    } else if (pageName === "RegisterPage") {
+    }  else if (pageName === "RegisterPage") {
         return <Register />
     } else if (pageName === "AccountPage") {
-        return <Account />
-    }
+        return <Account 
+                    userId={props.userId}
+                    db={db}
+                />
+    } 
     
     else {
         return <Home />
@@ -105,15 +78,24 @@ function Locate(props) {
     });
 
     const [inns, setInns] = useState([]);
+    const [inn, setInn] = useState();
     const [searchValue, setSearchValue] = useState('');
+    const [valid, setValid] = useState(true);
     const [noResults, setNoResults] = useState(false); //still not working right
 
     const handleSubmit = async e => {
         e.preventDefault();
-        db.get('businesses/zip?zip='+searchValue).then(response => setInns(response.data));
-        if (setInns.length === 0) {
-            setNoResults(!noResults);
+        setValid(true);
+        setNoResults(false);    
+        if (searchValue.length !== 5) {
+            setValid(!valid);
+        } else {
+            db.get('businesses/zip?zip='+searchValue).then(response => setInns(response.data));
+            if (setInns.length === 0) {
+                setNoResults(!noResults);
+            }
         }
+        
         
     }
 
@@ -125,16 +107,25 @@ function Locate(props) {
                     <label htmlFor="zip">Enter a Zip Code: </label>
                     <input type="text" onChange={({target}) => setSearchValue(target.value)} />
                     <button onClick={handleSubmit}>Search</button>
+                    <br />
+                    <h4 style={valid ? {display: 'none'} : {color: 'red'}}>Invalid: Please enter a valid Zip Code</h4>
                 </form>
-                <h3 style={noResults ?  {display:'none'} : {}}>Unfortunately, there are no member inns near that Zip Code.</h3>
+                <h3 style={!noResults ?  {display:'none'} : {}}>Unfortunately, there are no member inns near that Zip Code.</h3>
                 {inns.map((inn) => (
-                    <Link to={'/business/id-'+inn.id} onClick={props.setInnId(inn.id)}>
+                    <div>
                         <InnCard 
+                            db={db}
                             name={inn.name}
                             id={inn.id}
-
+                            street={inn.street}
+                            city={inn.city}
+                            zip={inn.zip}
+                            state={inn.state}
+                            contact={inn.contact}
+                            roomAmount={inn.roomAmount}
+                            amenities={inn.amenities}
                         />
-                    </Link>    
+                    </div>
                 ))}
             </div>
         </div>
@@ -157,27 +148,32 @@ function InfoLogin(props) {
         baseURL: `http://localhost:8080/csi3450project/v1`
     });
 
+
+
     const [uName, setUname] = useState("");
     const [pass, setPass] = useState("");
     const [incorrect, setIncorrect] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false);
+
 
     const handleChange = async e => {
         e.preventDefault();
         const response = await db.get('user/login?email='+uName+'&password='+pass);
-        localStorage.setItem('userId', response.data.id);
+        
         console.log(response);
         if (response.data === '') {
             setIncorrect(!incorrect);
         } else {
-            setLoggedIn(!loggedIn);
+            props.setLoggedIn(true);
+            localStorage.setItem('userId', response.data.id);
+            localStorage.setItem('loggedIn', true);
+
         }
         
     };
 
     
 
-    if (loggedIn) {
+    if (props.userLoggedIn) {
         return(
             <div className="info">
                 <h3>Congrats, you're logged in.</h3>
@@ -209,39 +205,6 @@ function InfoLogin(props) {
     );
 }
 
-function Booking(props) {
-    const db = Axios.create({
-        baseURL: `http://localhost:8080/csi3450project/v1`
-    });
-
-    const [rooms, setRooms] = useState([]);
-
-    useEffect(() => {
-        db.get('/room/business?businessId=1'/*+props.innId*/).then(response => setRooms(response.data));
-        
-    }, []);
-    
-
-    const handleSubmit = async e => {
-        e.preventDefault();
-    }
-    
-    return(
-        <div className="info">
-            <h1>Info</h1>
-            <form onSubmit={props.handleSubmit} id="bookingForm">
-                {rooms.map((room) => (
-                    <Room style={room.vacant ? {display: 'none'} : {}}
-                        number={room.number}
-                        price={room.price}
-                        vacant={room.vacant}
-                    />   
-                ))}
-            </form>
-        </div>
-    );
-}
-
 function Register(props) {
     const db = Axios.create({
         baseURL: `http://localhost:8080/csi3450project/v1`
@@ -264,6 +227,11 @@ function Register(props) {
     const [accountCreated, setAccountCreated] = useState(false);
     const [accountFailed, setAccountFailed] = useState(false);
 
+    const updateType = (accType) => {
+        setAccount((prevState) => ({...prevState, type: accType}));
+        console.log(account.type);
+    }
+
     const handleSubmit = async e => {
         e.preventDefault();
         setAccount((prevState) => ({...prevState, type: accountType}));
@@ -274,25 +242,15 @@ function Register(props) {
 
     return(
         <div className="info">
-            <h1>Michigan Bed and Breakfast Guild User Registration</h1>
-            <input type="radio" id="bnb" name="account" value="bnb" 
-                defaultChecked={true}
-                onChange={() => setAccountType('BnB')}
-            />
-            <label for="bnb">Member Bed and Breakfast</label><br />
-            <input type="radio" id="customer" name="account" value="customer" 
-                defaultChecked={false}
-                onChange={() => setAccountType('Customer')}
-            />
-            <label for="customer">Customer</label><br />
-            <input type="radio" id="event" name="account" value="event" 
-                defaultChecked={false}
-                onChange={() => setAccountType('Event')}
-            />
-            <label for="event">Event Organizer</label><br />
-
-            <div className="registerForm" >
+<           div className="registerForm" >
                 <form id="register">
+                    <h1>Michigan Bed and Breakfast Guild User Registration</h1>
+
+                    <p>Account type: {account.type}</p>
+                    <button onClick={(e) => {e.preventDefault(); setAccount((prevState) => ({...prevState, type: 'bnb'}))}}>BnB</button>
+                    <button onClick={(e) => {e.preventDefault(); setAccount((prevState) => ({...prevState, type: 'customer'}))}}>Customer</button>
+                    <button onClick={(e) => {e.preventDefault(); setAccount((prevState) => ({...prevState, type: 'event'}))}}>Event</button><br />
+
                     <label htmlFor="name">Name: </label>
                     <input type="text" onChange={({target}) => setAccount((prevState) => ({...prevState, name: target.value}))}/>
                     <br />
@@ -330,9 +288,95 @@ function Register(props) {
 }
 
 function Account(props) {
+    const [user, setUser] = useState({});
+    const [upName, setUpName] = useState(false);
+    const [bookings, setBookings] = useState([]);
+
+    const [upContact, setUpContact] = useState(false);
+
+    const [upAddress, setUpAddress] = useState(false);
+    const [upType, setUpType] = useState(false);
+
+    useEffect(() => {
+        props.db.get('/user?userId='+localStorage.getItem('userId')).then(response => setUser(response.data));
+        props.db.get('/booking/customer?customerId='+localStorage.getItem('userId')).then(response => setBookings(response.data));
+        console.log(bookings[0]);
+    }, []);
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+        await props.db.put('/user', user).then(response => console.log("updated"));
+
+    }
+
+    const deleteAccount = async e => {
+        e.preventDefault();
+        await props.db.delete('/user', {data: user.id}).then(response => console.log('deleted'));
+        localStorage.clear();
+    }
+
+    const handleCancel = async (booking) => {
+        await props.db.delete('/booking', {data: booking.bookingId}).then(response => console.log('deleted'));
+
+    }
+
     return(
         <div className="info">
+            <div>
+                <form id="accountForm">
+                <h3>Account Details</h3>
+                <p>Name: {user.name}</p> 
+                <button onClick={(e) => {e.preventDefault(); setUpName(!upName)}} style={upName ? {display: 'none'} : {}}>Update</button>
+                <input type="text" style={!upName ? {display: 'none'} : {}} onChange={({target}) => setUser((prevState) => ({...prevState, name: target.value}))}/>
+                <button style={!upName ? {display:'none'} : {}} onClick={(e) => {e.preventDefault(); setUpName(!upName)}}>Save</button>
+                
+                <p>Email: {user.email}</p> 
+                
+                <p>Phone: {user.contact}</p> 
+                <button onClick={(e) => {e.preventDefault(); setUpContact(!upContact)}} style={upContact ? {display: 'none'} : {}}>Update</button>
+                <input type="text" style={!upContact ? {display: 'none'} : {}} onChange={({target}) => setUser((prevState) => ({...prevState, contact: target.value}))}/>
+                <button onClick={(e) => {e.preventDefault(); setUpContact(!upContact)}} style={!upContact ? {display:'none'} : {}}>Save</button>
 
+                <p><strong>Address:</strong></p> 
+                <p>Street: {user.street}</p> 
+                <p>City: {user.city}, State: {user.state} Zip: {user.zip}</p>
+                <button onClick={(e) => {e.preventDefault(); setUpAddress(!upAddress)}} style={upAddress ? {display: 'none'} : {}}>Update</button>
+                <input type="text" placeholder="Street Address"
+                    onChange={({target}) => setUser((prevState) => ({...prevState, street: target.value}))}
+                    style={!upAddress ? {display: 'none'} : {}}
+                    />
+                <input type="text" placeholder="City"
+                    onChange={({target}) => setUser((prevState) => ({...prevState, city: target.value}))}
+                    style={!upAddress ? {display: 'none'} : {}}
+                    />
+                <input type="text" placeholder="State"
+                    onChange={({target}) => setUser((prevState) => ({...prevState, state: target.value}))}
+                    style={!upAddress ? {display: 'none'} : {}}
+                    />
+                <input type="text" placeholder="Zip"
+                    onChange={({target}) => setUser((prevState) => ({...prevState, zip: target.value}))}
+                    style={!upAddress ? {display: 'none'} : {}}
+                    />
+                <button onClick={(e) => {e.preventDefault(); setUpAddress(!upAddress)}} style={!upAddress ? {display: 'none'} : {}}>Save</button>
+                <p>Account type: {user.type}</p>
+                </form>
+            </div>    
+            <div>
+                <button onClick={handleSubmit}>Save Account</button>
+                <button onClick={deleteAccount}><Link to="/">Delete Account</Link></button>
+            </div>
+            <div style={(user.type === 'event') ? {} : {display: 'none'}}>
+                <p>hello</p>
+            </div>
+            <div style={(user.type === 'customer') ? {} : {display: 'none'}}>
+                <h3>Your reservations:</h3>
+                {bookings.map((booking) => (
+                    <div>
+                        <p>Date: {booking.date}</p>
+                        <button onClick={(e) => {e.preventDefault(); handleCancel(booking)}}>Cancel</button>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

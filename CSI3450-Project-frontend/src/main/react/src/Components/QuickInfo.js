@@ -91,10 +91,10 @@ function Inn() {
     );
 }
 
-function Account() {
+function Account(props) {
     return(
         <div className="quickInfo">
-
+            <h1>Welcome back</h1>
         </div>
     );
 }
