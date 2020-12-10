@@ -50,6 +50,7 @@
 }
 
 .login-container {
+    margin-top: 25vh;
     color: white;
     text-align: center;
 }
@@ -60,6 +61,7 @@
 
 .registerForm {
     position: absolute;
+    left:30vw;
     margin: 1%;
     padding: 1%;
     width: 30vw;
@@ -76,7 +78,7 @@
 }
 .personalForm > input {
     position: absolute;
-    right: 50px;
+    right: 20vw;;
     margin-bottom: 5px;
 }
 
@@ -87,10 +89,10 @@
 
 .addressForm > input {
     position: absolute;
-    right: 50px;
+    right: 20vw;;
 }
 
 .submitButton {
     position:absolute;
-    right: 50px;
+    right: 20vw;;
 }

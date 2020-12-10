@@ -32,6 +32,10 @@ const RoomCard = (props) => {
         setValidInput(false);
     }
 
+    const refreshPage = () => {
+        window.location.reload(false);
+    }
+
     const handleSubmit = async e => {
         e.preventDefault();
         console.log(booking.date);
@@ -49,6 +53,8 @@ const RoomCard = (props) => {
         if (props.userLoggedIn) {
             console.log("booked");
             await props.db.post('/booking', booking).then(response => setBooked(!booked));
+            window.alert("Your room has been booked!");
+            refreshPage();
         } else {
             window.alert("Please log in to book a room");
         }

@@ -75,7 +75,7 @@ function Home(props) {
 }
 
 function Locate(props) {
-    //May want to set up some form of persistance if user hits back to not lose search results
+    
     const db = Axios.create({
         baseURL: `http://localhost:8080/csi3450project/v1`
     });
@@ -84,7 +84,7 @@ function Locate(props) {
     const [inn, setInn] = useState();
     const [searchValue, setSearchValue] = useState('');
     const [valid, setValid] = useState(true);
-    const [noResults, setNoResults] = useState(false); //still not working right
+    const [noResults, setNoResults] = useState(false); 
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -161,8 +161,7 @@ function InfoLogin(props) {
 
     const handleChange = async e => {
         e.preventDefault();
-        const response = await db.get('user/login?email='+uName+'&password='+pass);
-        
+        const response = await db.get('/user/login?email='+uName+'&password='+pass);
         console.log(response);
         if (response.data === '') {
             setIncorrect(!incorrect);
@@ -183,12 +182,12 @@ function InfoLogin(props) {
                 <h3>Congrats, you're logged in.</h3>
             </div>
         );
-    }
+    } 
     return(
         <div className="info">
             <h3 style={(!incorrect ? {display: 'none', color: 'red'} : {color: 'red'})}>Incorrect email or password</h3>
             <div className="login-container">
-                
+                <h2>Please enter your Email and Password</h2>
                 <form onSubmit={handleChange} id="loginForm">
                     <label htmlFor="email">Email: </label>
                     <input type="text"  value={props.username} onChange={({target}) => setUname(target.value)}/>
@@ -207,6 +206,8 @@ function InfoLogin(props) {
             </div>
         </div>
     );
+    
+    
 }
 
 function Register(props) {
@@ -286,12 +287,14 @@ function Register(props) {
                 <Link to='/login'>
                     <button className="submitButton" onClick={handleSubmit}>Submit</button>
                 </Link>
+                <br />
+                <br />
+                <h1 style={!accountCreated ? {display:'none'} : {}}>Congratulations, your account was successfully created!</h1>
+                <h3 style={!accountCreated ? {display:'none'} : {}}>Click <Link to="/login">here</Link> to log in.</h3>
+
             </div>
             
-            <br />
-            <br />
-            <h1 style={!accountCreated ? {display:'none'} : {}}>Congratulations, your account was successfully created!</h1>
-            <h3 style={!accountCreated ? {display:'none'} : {}}>Click <Link to="/login">here</Link> to log in.</h3>
+            
         </div>
     )
 }

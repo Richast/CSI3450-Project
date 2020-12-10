@@ -41,6 +41,7 @@ const InnCard = (props) => {
                     <p>{props.street}</p>
                     <p>{props.city}, {props.state} {props.zip}</p>
                     <p>Phone: {props.contact}</p>
+                    <p>Special Amenities: {props.amenities}</p>
                 </div>
                 <div className="innCardItem">
                     <h3>Upcoming Bookings</h3>
@@ -61,6 +62,7 @@ const InnCard = (props) => {
                         roomId={room.id}
                         bookings={bookings}
                         userLoggedIn={props.userLoggedIn}
+                        setBookings={setBookings}
                     />
                 ))}
             </div>
