@@ -6,7 +6,7 @@ import './Events.css';
 
 function Events(props) {
     const db = Axios.create({
-        baseURL: `http://192.168.1.101:8080/csi3450project/v1`
+        baseURL: `http://localhost:8080/csi3450project/v1`
     });
 
     const [events, setEvents] = useState([]);

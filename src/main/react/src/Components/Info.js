@@ -7,7 +7,7 @@ import InnCard from './InnCard.js';
 
 function Info(props) {
     const db = Axios.create({
-        baseURL: `http://192.168.1.101:8080/csi3450project/v1`
+        baseURL: `http://localhost:8080/csi3450project/v1`
     });
 
     const [pageName, setPageName] = useState(props.pageName);
@@ -77,7 +77,7 @@ function Home(props) {
 function Locate(props) {
     //May want to set up some form of persistance if user hits back to not lose search results
     const db = Axios.create({
-        baseURL: `http://192.168.1.101:8080/csi3450project/v1`
+        baseURL: `http://localhost:8080/csi3450project/v1`
     });
 
     const [inns, setInns] = useState([]);
@@ -149,7 +149,7 @@ function Events(props) {
 
 function InfoLogin(props) {
     const db = Axios.create({
-        baseURL: `http://192.168.1.101:8080/csi3450project/v1`
+        baseURL: `http://localhost:8080/csi3450project/v1`
     });
 
 
@@ -211,7 +211,7 @@ function InfoLogin(props) {
 
 function Register(props) {
     const db = Axios.create({
-        baseURL: `http://192.168.1.101:8080/csi3450project/v1`
+        baseURL: `http://localhost:8080/csi3450project/v1`
     });
 
     
